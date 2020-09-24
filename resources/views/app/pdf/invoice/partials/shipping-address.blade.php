@@ -6,6 +6,9 @@
         </p>
     @endif
     <p class="shipping-address">
+        @if($invoice->user->shippingaddress->vat)
+            {{$invoice->user->shippingaddress->vat}},
+        @endif
         @if($invoice->user->shippingaddress->address_street_1)
             {!! nl2br(htmlspecialchars($invoice->user->shippingaddress->address_street_1)) !!}<br>
         @endif

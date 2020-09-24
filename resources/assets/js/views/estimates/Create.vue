@@ -39,6 +39,9 @@
                     <label v-if="selectedCustomer.billing_address.name">
                       {{ selectedCustomer.billing_address.name }}
                     </label>
+                    <label v-if="selectedCustomer.billing_address.vat">
+                      {{ selectedCustomer.billing_address.vat }}
+                    </label>
                     <label v-if="selectedCustomer.billing_address.address_street_1">
                       {{ selectedCustomer.billing_address.address_street_1 }}
                     </label>
@@ -54,6 +57,7 @@
                     <label v-if="selectedCustomer.billing_address.phone">
                       {{ selectedCustomer.billing_address.phone }}
                     </label>
+
                   </div>
                 </div>
               </div>
@@ -63,6 +67,9 @@
                   <div class="col-sm p-0 px-2 content">
                     <label v-if="selectedCustomer.shipping_address.name">
                       {{ selectedCustomer.shipping_address.name }}
+                    </label>
+                    <label v-if="selectedCustomer.shipping_address.vat">
+                      {{ selectedCustomer.shipping_address.vat }}
                     </label>
                     <label v-if="selectedCustomer.shipping_address.address_street_1">
                       {{ selectedCustomer.shipping_address.address_street_1 }}

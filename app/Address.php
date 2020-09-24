@@ -21,7 +21,8 @@ class Address extends Model
         'phone',
         'fax',
         'type',
-        'user_id'
+        'user_id',
+        'vat'
     ];
 
     public function user()

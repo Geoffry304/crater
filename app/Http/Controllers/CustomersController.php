@@ -86,6 +86,7 @@ class CustomersController extends Controller
                 $newAddress->zip = $address["zip"];
                 $newAddress->phone = $address["phone"];
                 $newAddress->type = $address["type"];
+                $newAddress->vat = $address["vat"];
                 $newAddress->user_id = $customer->id;
                 $newAddress->save();
                 $customer->addresses()->save($newAddress);
@@ -190,6 +191,7 @@ class CustomersController extends Controller
                 $newAddress->zip = $address["zip"];
                 $newAddress->phone = $address["phone"];
                 $newAddress->type = $address["type"];
+                $newAddress->vat = $address["vat"];
                 $newAddress->user_id = $customer->id;
                 $newAddress->save();
             }

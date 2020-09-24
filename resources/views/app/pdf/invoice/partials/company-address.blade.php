@@ -5,26 +5,24 @@
 @if($company_address)
     <p class="company-address">
         @if($company_address->addresses[0]['address_street_1'])
-            {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_1'])) !!} <br>
+            {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_1'])) !!}<br>
         @endif
 
-        @if($company_address->addresses[0]['address_street_2'])
-            {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_2'])) !!} <br>
+        @if($company_address->addresses[0]['zip'])
+            {{$company_address->addresses[0]['zip']}}
         @endif
         @if($company_address->addresses[0]['city'])
             {{$company_address->addresses[0]['city']}}
         @endif
-        @if($company_address->addresses[0]['state'])
-            {{$company_address->addresses[0]['state']}}
-        @endif
-        @if($company_address->addresses[0]['zip'])
-            {{$company_address->addresses[0]['zip']}} <br>
-        @endif
-        @if($company_address->addresses[0]['country'])
-            {{$company_address->addresses[0]['country']->name}} <br>
+        <br>
+        @if($company_address->addresses[0]['address_street_2'])
+            {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_2'])) !!} <br>
         @endif
         @if($company_address->addresses[0]['phone'])
-           {{$company_address->addresses[0]['phone']}} <br>
+            {{$company_address->addresses[0]['phone']}} <br>
+        @endif
+        @if(isset($settings['invoice_email']))
+            {!!  nl2br(htmlspecialchars($settings['invoice_email'])) !!} <br>
         @endif
     </p>
 @endif

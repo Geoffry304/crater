@@ -216,6 +216,15 @@
                   tab-index="14"
                 />
               </div>
+              <div class="form-group">
+                <label class="form-label">{{ $t('customers.vat') }}</label>
+                <base-input
+                  v-model.trim="billing.vat"
+                  type="text"
+                  name="vat"
+                  tab-index="15"
+                />
+              </div>
             </div>
           </div>
           <hr> <!-- second row complete  -->
@@ -238,7 +247,7 @@
                   v-model.trim="shipping.name"
                   type="text"
                   name="address_name"
-                  tab-index="15"
+                  tab-index="16"
                 />
               </div>
               <div class="form-group">
@@ -286,7 +295,7 @@
                   :options="shippingCountries"
                   :searchable="true"
                   :show-labels="false"
-                  :tabindex="16"
+                  :tabindex="18"
                   :allow-empty="true"
                   :placeholder="$t('general.select_country')"
                   label="name"
@@ -299,7 +308,7 @@
                   v-model="shipping.city"
                   name="shipping.city"
                   type="text"
-                  tab-index="18"
+                  tab-index="19"
                 />
               </div>
               <div class="form-group">
@@ -308,7 +317,7 @@
                   v-model.trim="shipping.phone"
                   type="text"
                   name="phone"
-                  tab-index="21"
+                  tab-index="20"
                 />
               </div>
               <div class="form-group">
@@ -317,6 +326,15 @@
                   v-model.trim="shipping.zip"
                   type="text"
                   name="zip"
+                  tab-index="21"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">{{ $t('customers.vat') }}</label>
+                <base-input
+                  v-model.trim="shipping.vat"
+                  type="text"
+                  name="vat"
                   tab-index="22"
                 />
               </div>

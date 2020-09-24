@@ -35,6 +35,41 @@
                 <span v-if="!$v.invoices.invoice_prefix.alpha" class="text-danger">{{ $t('validation.characters_only') }}</span>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <label class="input-label">{{ $t('settings.customization.invoices.invoice_iban') }}</label>
+                <base-input
+                  v-model="invoices.invoice_iban"
+                  @keyup="changeToUppercase('INVOICES')"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <label class="input-label">{{ $t('settings.customization.invoices.invoice_email') }}</label>
+                <base-input
+                  v-model="invoices.invoice_email"
+                  @input="$v.invoices.invoice_email.$touch()"
+                />
+                <span v-show="!$v.invoices.invoice_email.email" class="text-danger mt-1">{{ $t('validation.email_incorrect') }}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <label class="input-label">{{ $t('settings.customization.invoices.invoice_note') }}</label>
+                <base-input
+                  v-model="invoices.invoice_note"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <label class="input-label">{{ $t('settings.customization.invoices.invoice_footer') }}</label>
+                <base-input
+                  v-model="invoices.invoice_footer"
+                />
+              </div>
+            </div>
             <div class="row pb-3">
               <div class="col-md-12">
                 <base-button
@@ -304,7 +339,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters } from 'vuex'
-const { required, maxLength, alpha } = require('vuelidate/lib/validators')
+const { required, maxLength, alpha, email } = require('vuelidate/lib/validators')
 export default {
   mixins: [validationMixin],
   data () {
@@ -315,6 +350,10 @@ export default {
       paymentAutogenerate: false,
       invoices: {
         invoice_prefix: null,
+        invoice_iban: null,
+        invoice_note: null,
+        invoice_email: null,
+        invoice_footer: null,
         invoice_notes: null,
         invoice_terms_and_conditions: null
       },
@@ -351,6 +390,9 @@ export default {
         required,
         maxLength: maxLength(5),
         alpha
+      },
+      invoice_email: {
+        email
       }
     },
     estimates: {
@@ -476,6 +518,7 @@ export default {
     changeToUppercase (currentTab) {
       if (currentTab === 'INVOICES') {
         this.invoices.invoice_prefix = this.invoices.invoice_prefix.toUpperCase()
+        this.invoices.invoice_iban = this.invoices.invoice_iban.toUpperCase()
         return true
       }
 
@@ -504,6 +547,10 @@ export default {
 
       if (res.data) {
         this.invoices.invoice_prefix = res.data.invoice_prefix
+        this.invoices.invoice_iban = res.data.invoice_iban
+        this.invoices.invoice_email = res.data.invoice_email
+        this.invoices.invoice_note = res.data.invoice_note
+        this.invoices.invoice_footer = res.data.invoice_footer
         this.invoices.invoice_notes = res.data.invoice_notes
         this.invoices.invoice_terms_and_conditions = res.data.invoice_terms_and_conditions
         this.estimates.estimate_prefix = res.data.estimate_prefix

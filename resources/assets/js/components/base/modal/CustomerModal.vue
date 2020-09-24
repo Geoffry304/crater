@@ -192,6 +192,15 @@
                   />
                 </div>
               </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.vat') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="billing.vat"
+                    type="text"
+                  />
+                </div>
+              </div>
 
             </div>
           </tab>
@@ -299,6 +308,15 @@
                 <div class="col-sm-7">
                   <base-input
                     v-model="shipping.zip"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.vat') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="shipping.vat"
                     type="text"
                   />
                 </div>

@@ -303,6 +303,7 @@ class FrontendController extends Controller
 
     public function getInvoicePdf($id)
     {
+
         $invoice = Invoice::with([
                 'items',
                 'items.taxes',
@@ -349,27 +350,33 @@ class FrontendController extends Controller
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
-            $logo = $logo->getFullUrl();
+//            $logo = $logo->getFullUrl();
+            $logo = $logo->getPath();
+
         }
 
-        $colors = [
+        $settings = [
             'invoice_primary_color',
             'invoice_column_heading',
             'invoice_field_label',
             'invoice_field_value',
             'invoice_body_text',
             'invoice_description_text',
-            'invoice_border_color'
+            'invoice_border_color',
+            'invoice_iban',
+            'invoice_email',
+            'invoice_note',
+            'invoice_footer'
         ];
-        $colorSettings = CompanySetting::whereIn('option', $colors)
+        $dbSettings = CompanySetting::whereIn('option', $settings)
             ->whereCompany($invoice->company_id)
-            ->get();
+            ->get()->pluck('value', 'option');
 
         view()->share([
             'invoice' => $invoice,
             'company_address' => $companyAddress,
             'logo' => $logo ?? null,
-            'colors' => $colorSettings,
+            'settings' => $dbSettings,
             'labels' => $labels,
             'taxes' => $taxes
         ]);

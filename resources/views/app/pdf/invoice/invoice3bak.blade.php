@@ -32,18 +32,19 @@
         .header-bottom-divider {
             color: rgba(0, 0, 0, 0.2);
             position: absolute;
-            top: 120px;
+            top: 100px;
             left: 0px;
             width: 100%;
         }
 
         .header-section-left {
-            padding-top: 25px;
+            padding-top: 45px;
             padding-bottom: 45px;
             padding-left: 30px;
             display: inline-block;
             width: 30%;
         }
+
         .header-container {
             position: absolute;
             width: 100%;
@@ -54,7 +55,7 @@
 
         .header-logo {
             position: absolute;
-            height: 150px;
+            height: 50px;
             text-transform: capitalize;
             color: #817AE3;
         }
@@ -64,17 +65,7 @@
             position: absolute;
             right: 0;
             padding: 15px 30px 15px 0px;
-            text-align:right;
             float: right;
-        }
-        .header-section-center {
-            display: inline-block;
-            position: absolute;
-            left: 40%;
-            width:auto;
-            /*right:0;*/
-            /*margin:auto;*/
-            /*padding: 15px 30px 15px 0px;*/
         }
 
         .header {
@@ -85,30 +76,23 @@
         /* -- Company Address */
 
         .company-address-container {
-            width: 250px;
-            /*text-transform: capitalize;*/
+            width: auto;
+            text-transform: capitalize;
             margin-bottom: 2px;
         }
 
-         .company-address-container h1{
-            font-size: 11px;
-            /*line-height: 15px;*/
-            /*letter-spacing: 0.05em;*/
-             font-weight: normal;
+         .company-address-container h1 {
+            font-size: 15px;
+            line-height: 22px;
+            letter-spacing: 0.05em;
             margin-bottom: 0px;
             margin-top: 10px;
-        }
-
-        .invoice {
-            font-size: 25px;
-            letter-spacing: 0.05em;
-            font-weight: 400;
         }
 
         .company-address {
             margin-top: 2px;
             font-size: 12px;
-            line-height: 17px;
+            line-height: 15px;
             color: #595959;
         }
 
@@ -116,7 +100,7 @@
 
         .content-wrapper {
             display: block;
-            padding-top: 120px;
+            padding-top: 100px;
             padding-bottom: 20px;
         }
 
@@ -185,7 +169,7 @@
             font-size: 15px;
             line-height: 22px;
             margin: 0px;
-            max-width: 200px;
+            max-width: 160px;
         }
 
         .billing-address {
@@ -335,28 +319,6 @@
             padding-bottom: 10px;
         }
 
-        .footer {
-            font-size: 12px;
-            color: #595959;
-            margin-top: 15px;
-            /*margin-left: 30px;*/
-            /*width: 442px;*/
-            text-align: center;
-            page-break-inside: avoid;
-        }
-
-        .note {
-            font-size: 12px;
-            display:inline-block;
-            position:absolute;
-            color: #595959;
-            margin-top:5px;
-            /*margin-left: 30px;*/
-            width: 542px;
-            text-align: left;
-            /*page-break-inside: avoid;*/
-        }
-
          /* -- Helpers -- */
 
         .text-primary {
@@ -427,7 +389,6 @@
                     @endif
                 </td>
                 <td class="header-section-right company-address-container">
-                    <span class="invoice">Invoice</span>
                     @include('app.pdf.invoice.partials.company-address')
                 </td>
             </tr>
@@ -447,9 +408,7 @@
                 @else
                 <div class="shipping-address-container--left">
                 @endif
-                    @if($invoice->user->shippingaddress && $invoice->user->shippingaddress->address_street_1)
                         @include('app.pdf.invoice.partials.shipping-address')
-                    @endif
                     </div>
                     <div style="clear: both;"></div>
                 </div>
@@ -468,25 +427,12 @@
                             <td class="attribute-label">Due date</td>
                             <td class="attribute-value"> &nbsp;{{$invoice->formattedDueDate}}</td>
                         </tr>
-                        @if($company_address->addresses[0]['vat'])
-                            <tr>
-                                <td class="attribute-label">VAT</td>
-                                <td class="attribute-value"> &nbsp;{{$company_address->addresses[0]['vat']}}</td>
-                            </tr>
-                        @endif
-                        @if(isset($settings['invoice_iban']))
-                        <tr>
-                            <td class="attribute-label">IBAN</td>
-                            <td class="attribute-value"> &nbsp;{{$settings['invoice_iban']}}</td>
-                        </tr>
-                        @endif
                     </table>
                 </div>
                 <div style="clear: both;"></div>
             </div>
             @include('app.pdf.invoice.partials.table')
             @include('app.pdf.invoice.partials.notes')
-            @include('app.pdf.invoice.partials.footer')
         </div>
     </div>
 </body>

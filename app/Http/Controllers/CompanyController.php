@@ -101,7 +101,7 @@ class CompanyController extends Controller
             $company->addMediaFromRequest('logo')->toMediaCollection('logo');
         }
 
-        $fields = $request->only(['address_street_1', 'address_street_2', 'city', 'state', 'country_id', 'zip', 'phone']);
+        $fields = $request->only(['address_street_1', 'address_street_2', 'city', 'state', 'country_id', 'zip', 'phone', 'vat']);
         $address = Address::updateOrCreate(['user_id' => 1], $fields);
         $user = User::with(['addresses', 'addresses.country', 'company'])->find(1);
 
@@ -201,6 +201,10 @@ class CompanyController extends Controller
     {
         $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));
         $invoice_auto_generate = CompanySetting::getSetting('invoice_auto_generate', $request->header('company'));
+        $invoice_iban = CompanySetting::getSetting('invoice_iban', $request->header('company'));
+        $invoice_note = CompanySetting::getSetting('invoice_note', $request->header('company'));
+        $invoice_email = CompanySetting::getSetting('invoice_email', $request->header('company'));
+        $invoice_footer = CompanySetting::getSetting('invoice_footer', $request->header('company'));
 
         $estimate_prefix = CompanySetting::getSetting('estimate_prefix', $request->header('company'));
         $estimate_auto_generate  = CompanySetting::getSetting('estimate_auto_generate', $request->header('company'));
@@ -211,6 +215,10 @@ class CompanyController extends Controller
         return  response()->json([
             'invoice_prefix' => $invoice_prefix,
             'invoice_auto_generate' => $invoice_auto_generate,
+            'invoice_iban' => $invoice_iban,
+            'invoice_note' => $invoice_note,
+            'invoice_email' => $invoice_email,
+            'invoice_footer' => $invoice_footer,
             'estimate_prefix' => $estimate_prefix,
             'estimate_auto_generate' => $estimate_auto_generate,
             'payment_prefix' => $payment_prefix,
@@ -231,6 +239,10 @@ class CompanyController extends Controller
         if ($request->type == "INVOICES") {
             $sets = [
                 'invoice_prefix',
+                'invoice_iban',
+                'invoice_email',
+                'invoice_note',
+                'invoice_footer'
             ];
         }
 
@@ -241,7 +253,10 @@ class CompanyController extends Controller
         }
 
         foreach ($sets as $key) {
-            CompanySetting::setSetting($key, $request->$key, $request->header('company'));
+            if ($request->$key){
+                CompanySetting::setSetting($key, $request->$key, $request->header('company'));
+            }
+
         }
 
         return response()->json([

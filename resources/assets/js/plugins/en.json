@@ -141,6 +141,7 @@
     "state": "State",
     "city": "City",
     "zip_code": "Zip Code",
+    "vat": "VAT number",
     "added_on": "Added On",
     "action": "Action",
     "password": "Password",
@@ -617,6 +618,7 @@
       "city": "City",
       "address": "Address",
       "zip": "Zip",
+      "vat": "VAT",
       "save": "Save",
       "updated_message": "Company information updated successfully"
     },
@@ -653,6 +655,10 @@
         "title": "Invoices",
         "notes": "Notes",
         "invoice_prefix": "Invoice Prefix",
+        "invoice_iban": "Invoice IBAN",
+        "invoice_email": "Invoice Email",
+        "invoice_note": "Invoice Note",
+        "invoice_footer": "Invoice Footer",
         "invoice_settings": "Invoice Settings",
         "autogenerate_invoice_number": "Auto-generate Invoice Number",
         "invoice_setting_description": "Disable this, If you don't wish to auto-generate invoice numbers each time you create a new invoice.",
@@ -802,7 +808,7 @@
       "running_migrations": "Running Migrations",
       "finishing_update": "Finishing Update",
       "update_failed": "Update Failed",
-      "update_failed_text": "Sorry! Your update failed on : {step} step"   
+      "update_failed_text": "Sorry! Your update failed on : {step} step"
     }
   },
   "wizard": {

@@ -34,6 +34,9 @@
                 <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.bill_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
+                    <label v-if="selectedCustomer.billing_address.vat">
+                      {{ selectedCustomer.billing_address.vat }}
+                    </label>
                     <label v-if="selectedCustomer.billing_address.name">
                       {{ selectedCustomer.billing_address.name }}
                     </label>
@@ -59,6 +62,9 @@
                 <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.ship_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
+                    <label v-if="selectedCustomer.shipping_address.vat">
+                      {{ selectedCustomer.shipping_address.vat }}
+                    </label>
                     <label v-if="selectedCustomer.shipping_address.name">
                       {{ selectedCustomer.shipping_address.name }}
                     </label>
